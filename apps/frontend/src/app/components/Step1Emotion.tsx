@@ -15,7 +15,7 @@ export default function Step1Emotion({ emotion, setEmotion, setConcept, onNext }
 
   const handleSubmit = async () => {
     if (!emotion) {
-      setError('감정을 입력해주세요.');
+      setError('감정을 입력해주세요!');
       return;
     }
 
