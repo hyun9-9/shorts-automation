@@ -1,0 +1,270 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Linear Theme UI Components Usage Rules
+
+## 🎨 Design System Guidelines
+
+이 프로젝트는 Linear 디자인 시스템을 기반으로 한 재사용 가능한 UI 컴포넌트 라이브러리를 사용합니다. 모든 UI 개발 시 반드시 이 컴포넌트들을 우선적으로 사용해야 합니다.
+
+## 📦 Available Components
+
+### Core Components
+- `Button` - 다양한 스타일과 크기의 버튼
+- `Typography` - 텍스트 스타일링 (H1-H4, Body, Button, Nav)
+- `Card` - 콘텐츠 컨테이너 (이미지 지원 포함)
+- `Container` - 레이아웃 컨테이너
+- `Badge` - 상태 표시 배지
+- `Divider` - 구분선
+- `Carousel` - 슬라이드 쇼 (CarouselItem 포함)
+
+### Layout Components
+- `Navbar` - 네비게이션 바 (반응형, 모바일 메뉴 지원)
+- `Footer` - 푸터 (다양한 섹션과 소셜 링크)
+- `Hero` - 히어로 섹션 (다양한 레이아웃과 배경)
+
+## 🚀 Import Pattern
+
+```tsx
+// 올바른 import 방식
+import { Button, Typography, Card, Container, Badge, Divider, Carousel, CarouselItem, Navbar, Footer, Hero } from '@/components/ui';
+```
+
+## 📋 Usage Rules
+
+### 1. 컴포넌트 우선 사용 원칙
+- 새로운 UI 요소를 만들 때는 항상 기존 컴포넌트를 먼저 확인
+- 기존 컴포넌트로 구현 가능한 경우 새로 만들지 않음
+- 기존 컴포넌트의 props를 활용하여 커스터마이징
+
+### 2. 테마 시스템 준수
+- 색상, 타이포그래피, 간격, 테두리 반경 등은 반드시 테마 시스템 사용
+- 하드코딩된 스타일 값 사용 금지
+- `@/lib/theme`에서 테마 값 가져오기
+
+```tsx
+// 올바른 방식
+import { colors, typography, spacing, borderRadius } from '@/lib/theme';
+
+const styles = {
+  backgroundColor: colors.primary.main,
+  fontSize: typography.fontSize.h1,
+  padding: spacing.lg,
+  borderRadius: borderRadius.md,
+};
+
+// 잘못된 방식
+const styles = {
+  backgroundColor: '#5E6AD2', // 하드코딩 금지
+  fontSize: '64px', // 하드코딩 금지
+  padding: '24px', // 하드코딩 금지
+};
+```
+
+### 3. 컴포넌트별 사용 가이드
+
+#### Button
+```tsx
+// 올바른 사용
+<Button variant="primary" size="md">Click me</Button>
+<Button variant="secondary" size="sm">Cancel</Button>
+<Button variant="ghost" size="lg">Learn More</Button>
+
+// 잘못된 사용
+<button className="custom-button">Click me</button> // 기본 HTML 버튼 사용 금지
+```
+
+#### Typography
+```tsx
+// 올바른 사용
+<Typography variant="h1">Main Heading</Typography>
+<Typography variant="body" color="secondary">Body text</Typography>
+<Typography variant="h3" style={{ marginBottom: '20px' }}>Custom styled</Typography>
+
+// 잘못된 사용
+<h1>Main Heading</h1> // 기본 HTML 태그 사용 금지
+<p>Body text</p> // 기본 HTML 태그 사용 금지
+```
+
+#### Card
+```tsx
+// 올바른 사용
+<Card variant="elevated" padding="lg">
+  <Typography variant="h3">Card Title</Typography>
+  <Typography variant="body">Card content</Typography>
+</Card>
+
+<Card 
+  variant="elevated" 
+  padding="none"
+  image={{
+    src: "/image.jpg",
+    alt: "Card image",
+    height: "200px"
+  }}
+>
+  <div style={{ padding: '16px' }}>
+    <Typography variant="h3">Image Card</Typography>
+  </div>
+</Card>
+
+// 잘못된 사용
+<div className="custom-card">Card content</div> // 커스텀 카드 사용 금지
+```
+
+#### Navbar
+```tsx
+// 올바른 사용
+<Navbar 
+  menuItems={[
+    { label: 'Features', href: '/features' },
+    { label: 'Pricing', href: '/pricing' },
+  ]}
+  variant="default"
+/>
+
+// 잘못된 사용
+<nav className="custom-navbar">Navigation</nav> // 커스텀 네비게이션 사용 금지
+```
+
+#### Hero
+```tsx
+// 올바른 사용
+<Hero
+  title="Build the future of software"
+  subtitle="The issue tracking tool you'll enjoy using"
+  description="Linear helps streamline software projects."
+  primaryAction={{
+    label: "Get Started",
+    onClick: () => console.log("Get Started clicked")
+  }}
+  secondaryAction={{
+    label: "Learn More",
+    onClick: () => console.log("Learn More clicked")
+  }}
+/>
+
+// 잘못된 사용
+<section className="custom-hero">Hero content</section> // 커스텀 히어로 사용 금지
+```
+
+#### Footer
+```tsx
+// 올바른 사용
+<Footer 
+  variant="extended"
+  sections={[
+    {
+      title: 'Product',
+      links: [
+        { label: 'Features', href: '/features' },
+        { label: 'Pricing', href: '/pricing' },
+      ]
+    }
+  ]}
+/>
+
+// 잘못된 사용
+<footer className="custom-footer">Footer content</footer> // 커스텀 푸터 사용 금지
+```
+
+### 4. 레이아웃 패턴
+
+#### 페이지 레이아웃
+```tsx
+// 올바른 페이지 구조
+const Page = () => {
+  return (
+    <div>
+      <Navbar menuItems={menuItems} />
+      <Hero title="Page Title" description="Page description" />
+      <Container>
+        {/* 페이지 콘텐츠 */}
+      </Container>
+      <Footer />
+    </div>
+  );
+};
+```
+
+#### 카드 그리드
+```tsx
+// 올바른 카드 그리드
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: spacing.lg }}>
+  <Card variant="elevated" padding="lg">
+    <Typography variant="h3">Card 1</Typography>
+  </Card>
+  <Card variant="elevated" padding="lg">
+    <Typography variant="h3">Card 2</Typography>
+  </Card>
+</div>
+```
+
+### 5. 반응형 디자인
+- 모든 컴포넌트는 반응형 디자인을 지원
+- 모바일 우선 접근법 사용
+- 브레이크포인트는 테마 시스템에서 정의된 값 사용
+
+### 6. 접근성
+- 모든 컴포넌트는 기본적인 접근성 기능 포함
+- 키보드 네비게이션 지원
+- 스크린 리더 호환성
+- 적절한 ARIA 라벨 사용
+
+## 🔧 Development Guidelines
+
+### 1. 새 컴포넌트 개발 시
+- 기존 컴포넌트와 일관된 API 설계
+- 테마 시스템 활용
+- TypeScript 타입 정의 필수
+- Props 인터페이스 명확히 정의
+
+### 2. 스타일링
+- 인라인 스타일 대신 컴포넌트 props 활용
+- CSS 클래스 대신 컴포넌트 variant 사용
+- 테마 값 사용으로 일관성 유지
+
+### 3. 성능
+- 컴포넌트 재사용으로 번들 크기 최적화
+- 불필요한 리렌더링 방지
+- 메모이제이션 적절히 활용
+
+## 📚 Resources
+
+- **데모 페이지**: `/components` - 모든 컴포넌트 예제 확인
+- **테마 시스템**: `@/lib/theme` - 색상, 타이포그래피, 간격 등
+- **컴포넌트 문서**: `@/components/ui/README.md` - 상세 사용법
+
+## ⚠️ 금지사항
+
+1. **기본 HTML 요소 직접 사용 금지**
+   - `<button>`, `<h1>`, `<p>`, `<nav>`, `<footer>` 등
+   - 반드시 해당하는 컴포넌트 사용
+
+2. **하드코딩된 스타일 값 사용 금지**
+   - 색상, 폰트 크기, 간격 등
+   - 테마 시스템에서 값 가져오기
+
+3. **커스텀 CSS 클래스 사용 금지**
+   - 컴포넌트 props로 스타일링
+   - 필요한 경우 컴포넌트 확장
+
+4. **외부 UI 라이브러리 사용 금지**
+   - Material-UI, Ant Design, Chakra UI 등
+   - 프로젝트 내 컴포넌트 시스템 사용
+
+## ✅ 검증 체크리스트
+
+새로운 컴포넌트나 페이지를 만들 때 다음을 확인하세요:
+
+- [ ] 기존 컴포넌트로 구현 가능한지 확인
+- [ ] 테마 시스템 값 사용
+- [ ] 올바른 import 패턴 사용
+- [ ] TypeScript 타입 정의
+- [ ] 반응형 디자인 적용
+- [ ] 접근성 고려
+- [ ] 성능 최적화
+
+이 규칙을 따르면 일관된 디자인 시스템과 높은 코드 품질을 유지할 수 있습니다. 

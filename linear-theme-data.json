@@ -1,0 +1,424 @@
+{
+  "theme": {
+    "name": "Linear Website Theme",
+    "description": "Complete theme data extracted from linear.app website",
+    "version": "1.0.0",
+    "source": "https://linear.app/",
+    "extractedAt": "2025-09-01T05:59:29.733Z"
+  },
+  "colors": {
+    "primary": {
+      "main": "#5E6AD2",
+      "light": "#7170ff",
+      "dark": "#4F46E5"
+    },
+    "secondary": {
+      "main": "#8B5CF6",
+      "light": "#A855F7",
+      "dark": "#7C3AED"
+    },
+    "background": {
+      "body": "#08090A",
+      "surface": "#F8FAFC",
+      "card": "rgba(0, 0, 0, 0)",
+      "header": "rgba(10, 10, 10, 0.8)"
+    },
+    "text": {
+      "primary": "#F7F8F8",
+      "secondary": "#8A8F98",
+      "muted": "#D0D6E0",
+      "accent": "#D0D1E0"
+    },
+    "border": {
+      "primary": "#E2E8F0",
+      "secondary": "rgba(255, 255, 255, 0.08)",
+      "accent": "#F7F8F8"
+    },
+    "accent": {
+      "main": "#7170ff",
+      "light": "#8B5CF6",
+      "dark": "#5E6AD2"
+    },
+    "button": {
+      "primary": {
+        "background": "#5E6AD2",
+        "text": "#FFFFFF",
+        "border": "#5E6AD2"
+      },
+      "secondary": {
+        "background": "#E6E6E6",
+        "text": "#08090A",
+        "border": "#E6E6E6"
+      },
+      "ghost": {
+        "background": "rgba(0, 0, 0, 0)",
+        "text": "#8A8F98",
+        "border": "rgba(0, 0, 0, 0)"
+      }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "primary": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+      "fallback": "Inter, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif"
+    },
+    "fontSize": {
+      "xs": "0.75rem",
+      "sm": "0.875rem",
+      "base": "1rem",
+      "lg": "1.125rem",
+      "xl": "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "custom": {
+        "h1": "64px",
+        "h2": "56px",
+        "h3": "21px",
+        "h4": "14px",
+        "body": "17px",
+        "button": "13px",
+        "nav": "16px"
+      }
+    },
+    "fontWeight": {
+      "normal": "400",
+      "medium": "510",
+      "semibold": "590",
+      "bold": "680",
+      "custom": {
+        "h1": "510",
+        "h2": "538",
+        "h3": "510",
+        "h4": "510",
+        "body": "400",
+        "button": "510",
+        "nav": "400"
+      }
+    },
+    "lineHeight": {
+      "h1": "67.84px",
+      "h2": "61.6px",
+      "h3": "28px",
+      "h4": "24px",
+      "body": "27.2px"
+    },
+    "letterSpacing": {
+      "h1": "-1.408px",
+      "h2": "-1.82px",
+      "h3": "-0.37px",
+      "h4": "-0.182px",
+      "body": "normal"
+    }
+  },
+  "spacing": {
+    "xs": "0.25rem",
+    "sm": "0.5rem",
+    "md": "1rem",
+    "lg": "1.5rem",
+    "xl": "2rem",
+    "2xl": "3rem",
+    "3xl": "4rem",
+    "custom": {
+      "headerPadding": "0px",
+      "mainPadding": "64px 0px 0px",
+      "sectionPadding": "72px 0px 0px",
+      "buttonPadding": "0px 12px",
+      "buttonPaddingLarge": "0px 16px",
+      "navItemPadding": "0px 8px"
+    }
+  },
+  "borderRadius": {
+    "sm": "0.25rem",
+    "md": "0.375rem",
+    "lg": "0.5rem",
+    "xl": "0.75rem",
+    "full": "9999px",
+    "custom": {
+      "button": "8px",
+      "buttonLarge": "10px",
+      "navItem": "6px"
+    }
+  },
+  "shadows": {
+    "sm": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+    "md": "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+    "lg": "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+    "xl": "0 20px 25px -5px rgba(0, 0, 0, 0.1)"
+  },
+  "layout": {
+    "maxWidth": "1200px",
+    "containerWidth": "1234px",
+    "containerPadding": "1rem",
+    "gridGap": "1.5rem",
+    "display": {
+      "main": "flex",
+      "nav": "flex",
+      "button": "inline-flex"
+    },
+    "flexDirection": {
+      "main": "column"
+    },
+    "alignItems": {
+      "main": "normal"
+    },
+    "justifyContent": {
+      "main": "normal"
+    }
+  },
+  "components": {
+    "header": {
+      "backgroundColor": "rgba(10, 10, 10, 0.8)",
+      "color": "#F7F8F8",
+      "padding": "0px",
+      "borderBottom": "1px solid rgba(255, 255, 255, 0.08)",
+      "backdropFilter": "blur(10px)"
+    },
+    "navigation": {
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "border": "0px none #F7F8F8",
+      "display": "flex",
+      "items": [
+        {
+          "color": "#F7F8F8",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "padding": "0px 8px",
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "textDecoration": "none solid #F7F8F8",
+          "borderRadius": "6px"
+        },
+        {
+          "color": "#8A8F98",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "padding": "0px 12px",
+          "fontSize": "13px",
+          "fontWeight": "510",
+          "textDecoration": "none solid #8A8F98",
+          "borderRadius": "8px"
+        }
+      ]
+    },
+    "buttons": {
+      "primary": {
+        "backgroundColor": "#5E6AD2",
+        "color": "#FFFFFF",
+        "padding": "0px 16px",
+        "borderRadius": "10px",
+        "fontSize": "15px",
+        "fontWeight": "510",
+        "border": "1px solid #5E6AD2",
+        "display": "inline-flex"
+      },
+      "secondary": {
+        "backgroundColor": "#E6E6E6",
+        "color": "#08090A",
+        "padding": "0px 12px",
+        "borderRadius": "8px",
+        "fontSize": "13px",
+        "fontWeight": "510",
+        "border": "1px solid #E6E6E6",
+        "display": "flex"
+      },
+      "ghost": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "#8A8F98",
+        "padding": "0px 12px",
+        "borderRadius": "8px",
+        "fontSize": "13px",
+        "fontWeight": "510",
+        "border": "0px none #8A8F98",
+        "display": "none"
+      }
+    },
+    "headings": {
+      "h1": {
+        "fontSize": "64px",
+        "fontWeight": "510",
+        "color": "#F7F8F8",
+        "lineHeight": "67.84px",
+        "margin": "0px",
+        "padding": "0px",
+        "fontFamily": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+        "letterSpacing": "-1.408px"
+      },
+      "h2": {
+        "fontSize": "56px",
+        "fontWeight": "538",
+        "color": "#F7F8F8",
+        "lineHeight": "61.6px",
+        "margin": "0px",
+        "padding": "0px",
+        "fontFamily": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+        "letterSpacing": "-1.82px"
+      },
+      "h3": {
+        "fontSize": "21px",
+        "fontWeight": "510",
+        "color": "#F7F8F8",
+        "lineHeight": "28px",
+        "margin": "0px",
+        "padding": "0px",
+        "fontFamily": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+        "letterSpacing": "-0.37px"
+      },
+      "h4": {
+        "fontSize": "14px",
+        "fontWeight": "510",
+        "color": "#D0D6E0",
+        "lineHeight": "24px",
+        "margin": "0px",
+        "padding": "0px",
+        "fontFamily": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+        "letterSpacing": "-0.182px"
+      }
+    },
+    "paragraphs": {
+      "body": {
+        "fontSize": "17px",
+        "fontWeight": "400",
+        "color": "#8A8F98",
+        "lineHeight": "27.2px",
+        "margin": "0px",
+        "padding": "0px",
+        "fontFamily": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+        "letterSpacing": "normal"
+      }
+    },
+    "links": {
+      "primary": {
+        "backgroundColor": "#5E6AD2",
+        "color": "#FFFFFF",
+        "borderColor": "#FFFFFF",
+        "textDecorationColor": "#FFFFFF"
+      },
+      "secondary": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "#F7F8F8",
+        "borderColor": "#F7F8F8",
+        "textDecorationColor": "#F7F8F8"
+      }
+    },
+    "cards": {
+      "default": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none #F7F8F8",
+        "borderRadius": "0px",
+        "padding": "0px",
+        "margin": "0px",
+        "boxShadow": "none",
+        "backdropFilter": "none"
+      },
+      "section": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none #F7F8F8",
+        "borderRadius": "0px",
+        "padding": "72px 0px 0px",
+        "margin": "0px",
+        "boxShadow": "none",
+        "backdropFilter": "none"
+      }
+    }
+  },
+  "backgrounds": {
+    "body": {
+      "background": "rgb(8, 9, 10) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundImage": "none"
+    },
+    "main": {
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundImage": "none"
+    }
+  },
+  "cssVariables": {
+    "colorPrimary": "#5E6AD2",
+    "colorSecondary": "#8B5CF6",
+    "colorBackground": "#FFFFFF",
+    "colorSurface": "#F8FAFC",
+    "colorText": "#1E293B",
+    "colorTextSecondary": "#d0d6e0",
+    "colorBorder": "#E2E8F0",
+    "colorAccent": "#7170ff"
+  },
+  "designTokens": {
+    "colors": {
+      "primary": "#5E6AD2",
+      "secondary": "#8B5CF6",
+      "accent": "#7170ff",
+      "background": {
+        "dark": "#08090A",
+        "light": "#FFFFFF"
+      },
+      "text": {
+        "primary": "#F7F8F8",
+        "secondary": "#8A8F98",
+        "muted": "#D0D6E0"
+      }
+    },
+    "typography": {
+      "fontFamily": "\"Inter Variable\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Open Sans\", \"Helvetica Neue\", sans-serif",
+      "fontSizes": {
+        "xs": "0.75rem",
+        "sm": "0.875rem",
+        "base": "1rem",
+        "lg": "1.125rem",
+        "xl": "1.25rem",
+        "2xl": "1.5rem",
+        "3xl": "1.875rem",
+        "4xl": "2.25rem",
+        "h1": "64px",
+        "h2": "56px",
+        "h3": "21px",
+        "h4": "14px",
+        "body": "17px"
+      },
+      "fontWeights": {
+        "normal": "400",
+        "medium": "510",
+        "semibold": "590",
+        "bold": "680"
+      }
+    },
+    "spacing": {
+      "xs": "0.25rem",
+      "sm": "0.5rem",
+      "md": "1rem",
+      "lg": "1.5rem",
+      "xl": "2rem",
+      "2xl": "3rem",
+      "3xl": "4rem"
+    },
+    "borderRadius": {
+      "sm": "0.25rem",
+      "md": "0.375rem",
+      "lg": "0.5rem",
+      "xl": "0.75rem",
+      "full": "9999px",
+      "button": "8px",
+      "buttonLarge": "10px"
+    },
+    "shadows": {
+      "sm": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+      "md": "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+      "lg": "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+      "xl": "0 20px 25px -5px rgba(0, 0, 0, 0.1)"
+    }
+  },
+  "metadata": {
+    "extractionMethod": "Playwright browser automation",
+    "screenshotTaken": true,
+    "screenshotPath": "linear-website.png",
+    "totalElementsAnalyzed": 50,
+    "componentsIdentified": [
+      "header",
+      "navigation",
+      "buttons",
+      "headings",
+      "paragraphs",
+      "links",
+      "cards",
+      "sections"
+    ]
+  }
+} 
