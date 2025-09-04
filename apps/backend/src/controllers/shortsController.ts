@@ -263,13 +263,6 @@ export const generateAudio = async (req: Request, res: Response) => {
   }
 };
 
-export const generateSound = async (req: Request, res: Response) => {
-  // const { mood } = req.body;
-  // const soundUrl = await generateBackgroundSound(mood);
-  // res.json({ soundUrl });
-};
-
-
 
 export const autoEdit = async (req: Request, res: Response) => {
   try {

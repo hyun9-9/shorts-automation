@@ -2,7 +2,6 @@ import { Router } from 'express';
 import {
   generateText,
   generateAudio,
-  generateSound,
   generateImage,
   uploadImage,
   autoEdit,
@@ -16,7 +15,6 @@ const router = Router();
 router.post('/concept', generateConcept);
 router.post('/text', generateText);
 router.post('/audio', generateAudio);
-router.post('/sound', generateSound);
 router.post('/image', generateImage);
 router.post('/upload', uploadImage);
 router.post('/edit', autoEdit);
