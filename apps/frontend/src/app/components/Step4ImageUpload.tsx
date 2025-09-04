@@ -18,7 +18,7 @@ export default function Step4ImageUpload({ concept, script, setImageUrl, onNext,
   // Step4ImageUpload 바로 이미지 프롬프트 받아오기
   const fetchImagePrompt = async () => {
     const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-    const res = await axios.post(`${backendUrl}/api/shorts/image`, { concept, text: script.meditationScript });
+    const res = await axios.post(`${backendUrl}/api/shorts/image`, { concept, text: script });
     const imagePrompt = res.data.data;
     console.log(imagePrompt);
     setImagePrompt(imagePrompt);
@@ -105,7 +105,7 @@ export default function Step4ImageUpload({ concept, script, setImageUrl, onNext,
     <div className="space-y-6">
       <h2 className="text-xl font-semibold">4단계: 이미지 프롬프트 확인 및 업로드</h2>
       
-      <div className="bg-gray-100 p-4 rounded-md space-y-2">
+      <div className="p-4 rounded-md space-y-2">
         <p><a href="https://aistudio.google.com/prompts/12HqpoSqW5e1lhHu_ywLuobu2f80dzOVz?hl=ko" target="_blank" rel="noopener noreferrer">이미지 프롬프트 생성</a></p>
         <p><strong>이미지 프롬프트:</strong></p>
         <p className="italic text-gray-700">{imagePrompt}</p>

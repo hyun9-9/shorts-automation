@@ -6,6 +6,7 @@ import { synthesizeSpeech } from '../services/ttsService';
 import { generateImageAI } from '../services/imageService';
 import { autoEditVideo } from '../services/editService';
 import { generateConceptFromEmotion } from '../services/conceptService';
+import { uploadShorts } from '../services/youtubeService';
 import { ConceptData, MeditationScript } from '../types';
 import path from 'path';
 import fs from 'fs';
@@ -77,6 +78,7 @@ export const allProcess = async (req: Request, res: Response) => {
     // }
 
     // 4. 배경 사운드 다운 (https://www.mewpot.com)
+    // https://www.epidemicsound.com/music/themes/classical-collection/classical-storytelling/
     const music = '/music/MP_바람이 되어_ 너에게.mp3';
     // mewpot
 
@@ -189,6 +191,7 @@ export const generateImage = async (req: Request, res: Response) => {
     }
 
     console.log("이미지 프롬프트 생성 시작");
+    console.log(concept, text);
     const imagePrompt = await generateImageAI(concept, text);
     
     if (!imagePrompt) {
@@ -288,3 +291,19 @@ export const autoEdit = async (req: Request, res: Response) => {
 };
 
 
+export const pushYoutube = async (req: Request, res: Response) => {
+  const { videoFilePath, options } = req.body;
+  console.log('🚀 YouTube 쇼츠 업로드 시작...');
+  console.log(`📹 비디오 파일: ${videoFilePath}`);
+  console.log(`📝 제목: ${options.title}`);
+  
+  try {
+
+    const uploadResult = await uploadShorts(videoFilePath, options);
+
+    res.json({ success: true, data: uploadResult });
+  } catch (error) {
+    console.error('Youtube push error:', error);
+    res.status(500).json({ error: '유튜브 업로드 중 오류가 발생했습니다.' });
+  }
+};

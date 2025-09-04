@@ -7,7 +7,8 @@ import {
   uploadImage,
   autoEdit,
   generateConcept,
-  allProcess
+  allProcess,
+  pushYoutube
 } from '../controllers/shortsController';
 
 const router = Router();
@@ -19,6 +20,7 @@ router.post('/sound', generateSound);
 router.post('/image', generateImage);
 router.post('/upload', uploadImage);
 router.post('/edit', autoEdit);
+router.post('/pushYoutube', pushYoutube);
 
 router.get('/', allProcess);
 

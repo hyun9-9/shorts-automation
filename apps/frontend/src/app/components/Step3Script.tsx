@@ -50,7 +50,7 @@ export default function Step3Script({ concept, setScript, onNext, onBack }: Prop
             value={text}
             readOnly
             rows={10}
-            className="w-full p-4 border rounded-md bg-gray-50"
+            className="w-full p-4 border rounded-md"
           />
           <div className="flex gap-4">
             <button

@@ -11,7 +11,7 @@ export default function Step2Concept({ concept, onNext, onBack }: Props) {
     <div className="space-y-6">
       <h2 className="text-xl font-semibold">2단계: 콘셉트 확인</h2>
 
-      <div className="bg-gray-100 p-4 rounded-md space-y-2">
+      <div className="">
         <p><strong>제목:</strong> {concept.episodeTitle}</p>
         <p><strong>배경:</strong> {concept.concept.background}</p>
         <p><strong>감정:</strong> {concept.concept.emotion}</p>

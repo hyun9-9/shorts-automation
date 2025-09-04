@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 interface Props {
   concept: any;
   script: any;
@@ -16,12 +18,24 @@ export default function Step8Summary({
   onBack,
 }: Props) {
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const pushYoutube = async () => {
+    console.log('pushYoutube');
+    console.log(concept);
+    const res = await axios.post(`${backendUrl}/api/shorts/pushYoutube`, {
+      videoFilePath: videoUrl,
+      options: { title: concept?.episodeTitle }
+    });
+    const data = res.data;
+    console.log(data);
+    alert('영상이 저장되었습니다!');
+    window.location.href = `/`;
+  };
   return (
     <div className="space-y-6">
       <h2 className="text-xl font-semibold">8단계: 전체 결과 요약</h2>
 
       <div className="space-y-4">
-        <div className="bg-gray-100 p-4 rounded-md">
+        <div className="p-4 rounded-md">
           <h3 className="font-semibold mb-2">🎯 콘셉트</h3>
           <p><strong>제목:</strong> {concept?.episodeTitle}</p>
           <p><strong>배경 프롬프트:</strong> {concept?.concept?.background}</p>
@@ -30,7 +44,7 @@ export default function Step8Summary({
           <p><strong>나레이션:</strong> {concept?.concept?.narratorVoice}</p>
         </div>
 
-        <div className="bg-gray-100 p-4 rounded-md">
+        <div className="p-4 rounded-md">
           <h3 className="font-semibold mb-2">🧘‍♂️ 명상 스크립트</h3>
           <textarea
             readOnly
@@ -40,17 +54,17 @@ export default function Step8Summary({
           />
         </div>
 
-        <div className="bg-gray-100 p-4 rounded-md space-y-2">
+        <div className="p-4 rounded-md space-y-2">
           <h3 className="font-semibold">🖼️ 이미지</h3>
           <img src={`${backendUrl}${imageUrl}`} alt="최종 이미지" className="w-full max-w-md rounded-md" />
         </div>
 
-        <div className="bg-gray-100 p-4 rounded-md space-y-2">
+        <div className="p-4 rounded-md space-y-2">
           <h3 className="font-semibold">🔊 음성</h3>
           <audio controls src={`${backendUrl}${audioUrl}`} className="w-full" />
         </div>
 
-        <div className="bg-gray-100 p-4 rounded-md space-y-2">
+        <div className="p-4 rounded-md space-y-2">
           <h3 className="font-semibold">🎬 영상</h3>
           <video controls src={`${backendUrl}${videoUrl}`} className="w-full rounded-md" />
         </div>
@@ -64,7 +78,9 @@ export default function Step8Summary({
           이전
         </button>
         <button
-          onClick={() => alert('영상이 저장되었습니다!')}
+          onClick={() => {
+            pushYoutube();
+          }}
           className="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
         >
           완료 및 저장
