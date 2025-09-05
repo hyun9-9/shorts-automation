@@ -23,12 +23,17 @@ export default function Step8Summary({
     console.log(concept);
     const res = await axios.post(`${backendUrl}/api/shorts/pushYoutube`, {
       videoFilePath: videoUrl,
-      options: { title: concept?.episodeTitle }
+      options: { title: concept?.episodeTitle },
+      concept: concept,
+      script: script,
+      imageUrl: imageUrl,
+      audioUrl: audioUrl,
+      videoUrl: videoUrl
     });
     const data = res.data;
     console.log(data);
-    alert('영상이 저장되었습니다!');
-    window.location.href = `/`;
+    alert(`영상이 저장되었습니다! 링크: https://www.youtube.com/watch?v=${data.data.id}`);
+    console.log(`🔗 YouTube 링크: https://www.youtube.com/watch?v=${data.data.id}`);
   };
   return (
     <div className="space-y-6">

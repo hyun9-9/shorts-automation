@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
 interface Props {
   music: string;
   setMusic: (value: string) => void;
@@ -6,51 +9,62 @@ interface Props {
 }
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-const musicOptions = [
-  {
-    label: '폭포 아래의 침묵 (스트레스)',
-    value: `/music/MP_폭포_침묵.mp3`,
-  },
-  {
-    label: '달빛 아래의 속삭임 (외로움)',
-    value: `/music/MP_달빛_속삭임.mp3`,
-  },
-  {
-    label: '모래 위의 발자국 (분노)',
-    value: `/music/MP_모래_발자국.mp3`,
-  },
-  {
-    label: '구름 위의 숨결 (슬픔)',
-    value: `/music/MP_구름_숨결.mp3`,
-  },
-  {
-    label: '기본 음악',
-    value: `/music/MP_바람이 되어_ 너에게.mp3`,
-  },
-];
 
 export default function Step6Music({ music, setMusic, onNext, onBack }: Props) {
+  const [musicOptions, setMusicOptions] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const getBackgroundSound = async () => {
+    try {
+      const response = await axios.get(`${backendUrl}/api/shorts/getBackgroundSound`);
+      const data = response.data;
+      console.log(data);
+      setMusicOptions(data.data);
+      console.log(data.data);
+    } catch (error) {
+      console.error('음악 목록을 가져오는데 실패했습니다:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getBackgroundSound();
+  }, []);
+
   return (
     <div className="space-y-6">
       <h2 className="text-xl font-semibold">6단계: 배경 음악 선택</h2>
 
-      <div className="space-y-4">
-        {musicOptions.map((option) => (
-          <label key={option.value} className="block">
-            <input
-              type="radio"
-              name="music"
-              value={option.value}
-              checked={music === option.value}
-              onChange={() => setMusic(option.value)}
-              className="mr-2"
-            />
-            {option.label}
-          </label>
-        ))}
-      </div>
+      {loading ? (
+        <div className="text-center py-4">음악 목록을 불러오는 중...</div>
+      ) : (
+        <div className="space-y-4">
+          {musicOptions.length > 0 ? (
+            musicOptions.map((option) => (
+              <label key={option.value} className="block">
+                <input
+                  type="radio"
+                  name="music"
+                  value={option.value}
+                  checked={music === option.value}
+                  onChange={() => setMusic(option.value)}
+                  className="mr-2"
+                />
+                {option.label}
+              </label>
+            ))
+          ) : (
+            <div className="text-center py-4 text-gray-500">
+              사용 가능한 음악이 없습니다.
+            </div>
+          )}
+        </div>
+      )}
 
-      <audio controls src={`${backendUrl}${music}`} className="w-full mt-4" />
+      {music && (
+        <audio controls src={`${backendUrl}${music}`} className="w-full mt-4" />
+      )}
 
       <div className="flex gap-4 mt-6">
         <button

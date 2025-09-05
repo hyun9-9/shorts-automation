@@ -7,7 +7,8 @@ import {
   autoEdit,
   generateConcept,
   allProcess,
-  pushYoutube
+  pushYoutube,
+  getBackgroundSound
 } from '../controllers/shortsController';
 
 const router = Router();
@@ -21,6 +22,6 @@ router.post('/edit', autoEdit);
 router.post('/pushYoutube', pushYoutube);
 
 router.get('/', allProcess);
-
+router.get('/getBackgroundSound', getBackgroundSound);
 
 export default router;
