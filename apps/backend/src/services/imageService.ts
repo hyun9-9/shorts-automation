@@ -30,7 +30,8 @@ export const generateImageAI = async (concept: ConceptData,text: MeditationScrip
     - 이 프롬프트는 시청자가 'sentence' 내용에 빠져들도록 만들어야 합니다.
     - 'sentence'에 등장한  구체적인 배경, 사물, 상황 등을 키워드 중심으로 묘사하세요. 
     - 생성된 프롬프트는 예술적 감수성, 풍부한 상상력, 깊은 만족감을 제공해야 합니다. 
-    - 사실적이게 표현을해야합니다
+    - 사실적이게 표현을해야합니다.
+    - 사람이 있는 이미지는 생성하지 마세요.
 
     이미지 생성 시작해주세요.
     `;
