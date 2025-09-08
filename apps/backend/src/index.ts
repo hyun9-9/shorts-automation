@@ -19,6 +19,7 @@ app.use('/audio', express.static(path.join(__dirname, '..', 'public', 'audio')))
 app.use('/images', express.static(path.join(__dirname, '..', 'public', 'images')));
 app.use('/music', express.static(path.join(__dirname, '..', 'public', 'music')));
 app.use('/output', express.static(path.join(__dirname, '..', 'public', 'output')));
+app.use('/videos', express.static(path.join(__dirname, '..', 'public', 'videos')));
 
 app.get('/', (req, res) => {
   res.send('유튜브 쇼츠 자동화 백엔드 서버가 실행 중입니다.');

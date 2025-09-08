@@ -205,7 +205,99 @@ export const generateImage = async (req: Request, res: Response) => {
   }
 };
 
-// 이미지 업로드 
+// 파일 업로드 (이미지 및 영상 지원)
+export const uploadFile = async (req: Request, res: Response) => {
+  try {
+    // FormData에서 전송된 파일 데이터 처리
+    const { file, fileType } = req.body;
+    
+    if (!file) {
+      return res.status(400).json({ error: '업로드된 파일이 없습니다.' });
+    }
+
+    // 파일 타입 감지 (Base64 헤더에서 추출)
+    let detectedFileType = fileType;
+    let fileExtension = 'jpg'; // 기본값
+    
+    if (!detectedFileType && file.startsWith('data:')) {
+      // Base64 헤더에서 파일 타입 추출
+      const mimeMatch = file.match(/data:([^;]+);/);
+      if (mimeMatch) {
+        detectedFileType = mimeMatch[1];
+      }
+    }
+    
+    // MIME 타입에 따른 확장자 결정
+    if (detectedFileType) {
+      const mimeToExt: { [key: string]: string } = {
+        'image/jpeg': 'jpg',
+        'image/jpg': 'jpg',
+        'image/png': 'png',
+        'image/gif': 'gif',
+        'image/webp': 'webp',
+        'video/mp4': 'mp4',
+        'video/avi': 'avi',
+        'video/mov': 'mov',
+        'video/wmv': 'wmv',
+        'video/flv': 'flv',
+        'video/webm': 'webm',
+        'video/mkv': 'mkv'
+      };
+      
+      fileExtension = mimeToExt[detectedFileType] || 'jpg';
+    }
+
+    // 파일명 생성 (UUID + 확장자)
+    const fileName = `upload-${uuidv4()}.${fileExtension}`;
+    
+    // 파일 타입에 따른 디렉토리 결정
+    const isVideo = detectedFileType?.startsWith('video/') || 
+                   ['mp4', 'avi', 'mov', 'wmv', 'flv', 'webm', 'mkv'].includes(fileExtension);
+    
+    const uploadDir = isVideo ? 'videos' : 'images';
+    const uploadPath = path.join(__dirname, '..', '..', 'public', uploadDir);
+    
+    // 디렉토리가 없으면 생성
+    if (!fs.existsSync(uploadPath)) {
+      fs.mkdirSync(uploadPath, { recursive: true });
+    }
+    
+    // 최종 저장 경로
+    const savePath = path.join(uploadPath, fileName);
+    
+    // Base64 데이터를 파일로 저장
+    let fileBuffer: Buffer;
+    
+    if (file.startsWith('data:')) {
+      // Base64 데이터에서 실제 데이터 부분만 추출
+      const base64Data = file.split(',')[1];
+      fileBuffer = Buffer.from(base64Data, 'base64');
+    } else {
+      // 이미 Base64 문자열인 경우
+      fileBuffer = Buffer.from(file, 'base64');
+    }
+    
+    fs.writeFileSync(savePath, fileBuffer);
+    
+    // 클라이언트에서 접근할 수 있는 URL 반환
+    const fileUrl = `/${uploadDir}/${fileName}`;
+    
+    console.log(`${isVideo ? '영상' : '이미지'} 업로드 성공:`, fileUrl);
+    res.json({ 
+      success: true, 
+      fileUrl,
+      fileType: detectedFileType,
+      isVideo,
+      fileName
+    });
+    
+  } catch (error) {
+    console.error('File upload error:', error);
+    res.status(500).json({ error: '파일 업로드 중 오류가 발생했습니다.' });
+  }
+};
+
+// 기존 이미지 업로드 함수 (하위 호환성을 위해 유지)
 export const uploadImage = async (req: Request, res: Response) => {
   try {
     // FormData에서 전송된 파일 데이터 처리

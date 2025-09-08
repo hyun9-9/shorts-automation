@@ -90,15 +90,25 @@ ${events}
 
     const subtitlePathNormalized = subtitlePath.replace(/\\/g, "/").replace(/:/g, "\\:");
 
+    const ext = path.extname(imagePath).toLowerCase();
+    let inputOption = "";
+  
+    if ([".jpg", ".jpeg", ".png", ".webp"].includes(ext)) {
+      // 이미지 → 무한 루프
+      inputOption = `-loop 1 -i "${imagePath}"`;
+    } else {
+      // 영상 → 무한 반복
+      inputOption = `-stream_loop -1 -i "${imagePath}"`;
+    }
     
     // 4️⃣ FFmpeg 명령어 (TTS 볼륨 높임, BGM 볼륨 낮춤)
-    const cmd = `ffmpeg -y -loop 1 -i "${imagePath}" -i "${audioPath}" -i "${musicPath}" \
+    const cmd = `ffmpeg -y ${inputOption} -i "${audioPath}" -i "${musicPath}" \
 -filter_complex "[0:v]scale=1080:1920,setsar=1,ass='${subtitlePathNormalized}'[v]; \
 [1:a]volume=1.2[a1]; \
 [2:a]volume=0.3[a2]; \
 [a1][a2]amix=inputs=2:duration=longest:dropout_transition=2[outa]" \
 -map "[v]" -map "[outa]" \
--t ${totalDuration} -c:v libx264 -c:a aac -shortest "${videoPath}"`;
+-t ${totalDuration + 1} -c:v libx264 -c:a aac -shortest "${videoPath}"`;
 
     console.log('FFmpeg 명령어:', cmd);
 

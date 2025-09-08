@@ -4,6 +4,7 @@ import {
   generateAudio,
   generateImage,
   uploadImage,
+  uploadFile,
   autoEdit,
   generateConcept,
   allProcess,
@@ -18,6 +19,7 @@ router.post('/text', generateText);
 router.post('/audio', generateAudio);
 router.post('/image', generateImage);
 router.post('/upload', uploadImage);
+router.post('/uploadFile', uploadFile);
 router.post('/edit', autoEdit);
 router.post('/pushYoutube', pushYoutube);
 

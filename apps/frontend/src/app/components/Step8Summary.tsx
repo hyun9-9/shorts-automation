@@ -55,7 +55,7 @@ export default function Step8Summary({
             readOnly
             value={script?.meditationScript}
             rows={6}
-            className="w-full p-2 border rounded-md bg-white"
+            className="w-full p-2 border rounded-md"
           />
         </div>
 
