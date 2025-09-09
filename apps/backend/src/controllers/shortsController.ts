@@ -97,7 +97,13 @@ export const allProcess = async (req: Request, res: Response) => {
     // 참고 
     // https://kminito.tistory.com/108
     // https://www.gyan.dev/ffmpeg/builds/
-    const video = await autoEditVideo({ script: text.meditationScript, audioUrl: audio, imageUrl: image, music: music });
+    const video = await autoEditVideo({ 
+      script: text.meditationScript, 
+      audioUrl: audio, 
+      imageUrl: image, 
+      music: music,
+      musicStartTime: 0 // Add required musicStartTime parameter
+    });
     if (!video) {
       return res.status(500).json({ error: '비디오 편집에 실패했습니다.' });
     }
@@ -131,12 +137,12 @@ export const generateConcept = async (req: Request, res: Response) => {
     console.log("콘셉트 생성 시작");
     const concept: ConceptData = await generateConceptFromEmotion(emotion);
     // const concept: ConceptData = {
-    //   episodeTitle: '별빛 스파의 휴식',
+    //   episodeTitle: '폭포 아래의 침묵',
     //   concept: {
-    //     emotion: '스트레스 → 고요함',
-    //     background: '신비로운 별빛이 쏟아지는 심해 속 스파',
-    //     narratorVoice: '부드럽고 차분한 여성 목소리',
-    //     sound: '잔잔한 물방울 소리, 심해 속 고유한 울림'
+    //     emotion: '스트레스 → 평온',
+    //     background: '시원한 물줄기가 쏟아져 내리는 폭포 아래, 주변은 온통 푸른 이끼와 젖은 바위들로 둘러싸여 있습니다. 물방울이 튀어 오르는 시원한 기운이 느껴지고, 햇살이 나뭇잎 사이로 부드럽게 스며들어 반짝입니다.',
+    //     narratorVoice: '깊고 차분한 저음의 목소리',
+    //     sound: '웅장하게 쏟아지는 폭포 소리, 잔잔하게 흐르는 물소리, 간간히 들려오는 새소리'
     //   }
     // };
 
@@ -160,14 +166,14 @@ export const generateText = async (req: Request, res: Response) => {
     console.log("명상 스크립트 생성 시작");
     const text: MeditationScript = await generateMeditationScript(concept);
     // const text: MeditationScript = {
-    //   meditationScript: '밤하늘을 수놓은 별빛 아래, 따뜻한 물결이 당신을 감싸 안습니다. 잔잔한 물결 소리가 지친 마음을 어루만지고, 모든 근심을 씻어내려 줍니다. 은은한 아로마 향이 코끝을 스치며 깊은 평온으로 인도합니다. 몸과 마음의 긴장이 스르르 풀리며, 온전한 휴식에 잠깁니다. 지금 이 순간, 모든 걱정은 잠시 내려놓고, 별빛 스파의 고요함을 만끽하세요. 당신은 이 평화로운 휴식을 누릴 자격이 있습니다.',
+    //   meditationScript: '지금 당신이 서 있는 곳은 쏟아지는 폭포 아래, 세상의 모든 소음이 씻겨 내려가는 고요한 공간입니다. 차가운 물방울이 얼굴을 스치며 일상의 무거운 짐을 잠시 내려놓게 합니다. 귀를 기울여 보세요. 물이 바위에 부딪히는 부드러운 속삭임만이 들려옵니다. 이 순간, 당신의 마음속 모든 걱정과 불안도 물줄기처럼 흘러가도록 허락하세요. 깊은 숨을 들이쉬고, 평온이 당신의 모든 세포를 채우는 것을 느껴보세요. 이제 당신은 온전히 평화롭고 고요합니다.',
     //   sentence: [
-    //     '밤하늘을 수놓은 별빛 아래, 따뜻한 물결이 당신을 감싸 안습니다.',
-    //     '잔잔한 물결 소리가 지친 마음을 어루만지고, 모든 근심을 씻어내려 줍니다.',
-    //     '은은한 아로마 향이 코끝을 스치며 깊은 평온으로 인도합니다.',
-    //     '몸과 마음의 긴장이 스르르 풀리며, 온전한 휴식에 잠깁니다.',
-    //     '지금 이 순간, 모든 걱정은 잠시 내려놓고, 별빛 스파의 고요함을 만끽하세요.',
-    //     '당신은 이 평화로운 휴식을 누릴 자격이 있습니다.'
+    //     '지금 당신이 서 있는 곳은 쏟아지는 폭포 아래, 세상의 모든 소음이 씻겨 내려가는 고요한 공간입니다.',
+    //     '차가운 물방울이 얼굴을 스치며 일상의 무거운 짐을 잠시 내려놓게 합니다.',
+    //     '귀를 기울여 보세요. 물이 바위에 부딪히는 부드러운 속삭임만이 들려옵니다.',
+    //     '이 순간, 당신의 마음속 모든 걱정과 불안도 물줄기처럼 흘러가도록 허락하세요.',
+    //     '깊은 숨을 들이쉬고, 평온이 당신의 모든 세포를 채우는 것을 느껴보세요.',
+    //     '이제 당신은 온전히 평화롭고 고요합니다.'
     //   ]
     // }
     console.log(text);
@@ -344,7 +350,7 @@ export const generateAudio = async (req: Request, res: Response) => {
     // 5. tts음성 생성 시작
     console.log("tts음성 생성 시작");
     const audio = await synthesizeSpeech(text.meditationScript);
-    // const audio = '/audio/tts-431aab8d-cbb6-47a9-90d6-d4cd697bd373.wav';
+    // const audio = '/audio/tts-60518267-a621-44a6-9928-f246e62aa657.wav';
     console.log(audio);
     if (!audio) {
       return res.status(500).json({ error: '음성 합성에 실패했습니다.' });
@@ -370,13 +376,14 @@ export const getBackgroundSound = async (req: Request, res: Response) => {
 
 export const autoEdit = async (req: Request, res: Response) => {
   try {
-    const { text, audio, image, music } = req.body;
+    const { text, audio, image, music, musicStartTime } = req.body;
     // 6. 비디오 편집 시작
     console.log("비디오 편집 시작");
+    console.log('musicStartTime', musicStartTime);
     // 참고 
     // https://kminito.tistory.com/108
     // https://www.gyan.dev/ffmpeg/builds/
-    const video = await autoEditVideo({ script: text.meditationScript, audioUrl: audio, imageUrl: image, music: music });
+    const video = await autoEditVideo({ script: text.meditationScript, audioUrl: audio, imageUrl: image, music: music, musicStartTime: musicStartTime });
     if (!video) {
       return res.status(500).json({ error: '비디오 편집에 실패했습니다.' });
     }
@@ -393,6 +400,7 @@ export const pushYoutube = async (req: Request, res: Response) => {
   console.log('🚀 YouTube 쇼츠 업로드 시작...');
   console.log(`📹 비디오 파일: ${videoFilePath}`);
   console.log(`📝 제목: ${options.title}`);
+  console.log(`📝 설명: ${options.description}`);
   
   try {
 

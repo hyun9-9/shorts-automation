@@ -21,6 +21,7 @@ export default function ShortsPage() {
   const [imageUrl, setImageUrl] = useState('');
   const [audioUrl, setAudioUrl] = useState('');
   const [music, setMusic] = useState('');
+  const [musicStartTime, setMusicStartTime] = useState(0);
   const [videoUrl, setVideoUrl] = useState('');
 
   const nextStep = () => setStep((prev) => prev + 1);
@@ -137,7 +138,9 @@ export default function ShortsPage() {
               onNext={nextStep} 
               onBack={prevStep} 
               music={music} 
-              setMusic={setMusic} 
+              setMusic={setMusic}
+              musicStartTime={musicStartTime}
+              setMusicStartTime={setMusicStartTime}
             />
           )}
           {step === 7 && (
@@ -147,7 +150,8 @@ export default function ShortsPage() {
               script={script} 
               audioUrl={audioUrl} 
               imageUrl={imageUrl} 
-              music={music} 
+              music={music}
+              musicStartTime={musicStartTime}
               setVideoUrl={setVideoUrl} 
             />
           )}

@@ -44,7 +44,6 @@ export async function uploadShorts(
   console.log('🚀 YouTube 쇼츠 업로드 시작...');
   console.log(`📹 비디오 파일: ${videoFilePath}`);
   console.log(`📝 제목: ${options.title}`);
-  
   try {
     // 1. 인증 설정
     console.log('\n🔐 YouTube API 인증 중...');

@@ -112,7 +112,7 @@ const Hero: React.FC<HeroProps> = ({
   const variantStyles = {
     default: {
       textAlign: 'left' as const,
-      maxWidth: '600px',
+      // maxWidth: '600px',
     },
     centered: {
       textAlign: 'center' as const,
@@ -151,7 +151,7 @@ const Hero: React.FC<HeroProps> = ({
     lineHeight: typography.lineHeight.body,
     color: colors.text.secondary,
     margin: '0 0 32px 0',
-    maxWidth: '600px',
+    // maxWidth: '600px',
   };
 
   const actionsStyles = {

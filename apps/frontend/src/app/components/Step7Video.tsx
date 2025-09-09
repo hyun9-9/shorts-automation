@@ -6,6 +6,7 @@ interface Props {
   audioUrl: string;
   imageUrl: string;
   music: string;
+  musicStartTime: number;
   setVideoUrl: (value: string) => void;
   onNext: () => void;
   onBack: () => void;
@@ -16,6 +17,7 @@ export default function Step7Video({
   audioUrl,
   imageUrl,
   music,
+  musicStartTime,
   setVideoUrl,
   onNext,
   onBack,
@@ -27,13 +29,14 @@ export default function Step7Video({
   const handleGenerateVideo = async () => {
     setLoading(true);
     setError('');
-    console.log(script, audioUrl, imageUrl, music);
+    console.log(script, audioUrl, imageUrl, music, musicStartTime);
     try {
       const res = await axios.post(`${backendUrl}/api/shorts/edit`, {
         text: script,
         audio: audioUrl,
         image: imageUrl,
         music,
+        musicStartTime
       });
 
       const url = res.data.data;

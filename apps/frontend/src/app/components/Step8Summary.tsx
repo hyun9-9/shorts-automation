@@ -23,7 +23,7 @@ export default function Step8Summary({
     console.log(concept);
     const res = await axios.post(`${backendUrl}/api/shorts/pushYoutube`, {
       videoFilePath: videoUrl,
-      options: { title: concept?.episodeTitle },
+      options: { title: concept?.episodeTitle , description: concept?.concept?.emotion},
       concept: concept,
       script: script,
       imageUrl: imageUrl,

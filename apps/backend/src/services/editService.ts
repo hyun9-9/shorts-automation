@@ -8,11 +8,13 @@ export const autoEditVideo = async ({
   audioUrl,
   imageUrl,
   music,
+  musicStartTime = 0,
 }: {
   script: string;
   audioUrl: string;
   imageUrl: string;
   music: string;
+  musicStartTime: number;
 }): Promise<string> => {
   try {
     const outputDir = path.join(__dirname, '..', '..', 'public', 'output');
@@ -102,7 +104,7 @@ ${events}
     }
     
     // 4️⃣ FFmpeg 명령어 (TTS 볼륨 높임, BGM 볼륨 낮춤)
-    const cmd = `ffmpeg -y ${inputOption} -i "${audioPath}" -i "${musicPath}" \
+    const cmd = `ffmpeg -y ${inputOption} -i "${audioPath}" -ss ${musicStartTime} -i "${musicPath}" \
 -filter_complex "[0:v]scale=1080:1920,setsar=1,ass='${subtitlePathNormalized}'[v]; \
 [1:a]volume=1.2[a1]; \
 [2:a]volume=0.3[a2]; \
