@@ -94,18 +94,25 @@ ${events}
 
     const ext = path.extname(imagePath).toLowerCase();
     let inputOption = "";
-  
+    let setpts = "";
     if ([".jpg", ".jpeg", ".png", ".webp"].includes(ext)) {
       // 이미지 → 무한 루프
       inputOption = `-loop 1 -i "${imagePath}"`;
     } else {
       // 영상 → 무한 반복
-      inputOption = `-stream_loop -1 -i "${imagePath}"`;
+      // inputOption = `-stream_loop -1 -i "${imagePath}"`;
+
+      inputOption = ` -i "${imagePath}"`;
+      const videoDuration = getAudioDuration(imagePath);
+      // setpts 비율 계산
+      let ptsRatio = (totalDuration / videoDuration).toFixed(2);
+      
+      setpts = `setpts=${ptsRatio}*PTS,`;
     }
     
     // 4️⃣ FFmpeg 명령어 (TTS 볼륨 높임, BGM 볼륨 낮춤)
     const cmd = `ffmpeg -y ${inputOption} -i "${audioPath}" -ss ${musicStartTime} -i "${musicPath}" \
--filter_complex "[0:v]scale=1080:1920,setsar=1,ass='${subtitlePathNormalized}'[v]; \
+-filter_complex "[0:v]scale=1080:1920,setsar=1,${setpts}ass='${subtitlePathNormalized}'[v]; \
 [1:a]volume=1.2[a1]; \
 [2:a]volume=0.3[a2]; \
 [a1][a2]amix=inputs=2:duration=longest:dropout_transition=2[outa]" \
